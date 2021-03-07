@@ -1,3 +1,4 @@
 [submodule "zexe"]
 	path = zexe
-	url = https://github.com/o1-labs/zexe.git
+	url = https://github.com/minatools/zexe
+	branch = master-bazel

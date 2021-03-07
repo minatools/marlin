@@ -1,4 +1,4 @@
-load("@io_bazel_rules_rust//rust:rust.bzl", "rust_library")
+load("@rules_rust//rust:rust.bzl", "rust_library")
 
 rust_library(
     name = "marlin_protocol_pairing",
@@ -16,9 +16,9 @@ rust_library(
         "//circuits/marlin:marlin_circuits",
         "//oracle",
 
-        "//bzl/cargo:rand",
-        "//bzl/cargo:rand_core",
-        "//bzl/cargo:colored",
-        "//bzl/cargo:sprs",
+        "//bzl/raze/cargo:rand",
+        "//bzl/raze/cargo:rand_core",
+        "//bzl/raze/cargo:colored",
+        "//bzl/raze/cargo:sprs",
     ]
 )

@@ -1,19 +1,26 @@
-load("@io_bazel_rules_rust//rust:rust.bzl", "rust_library")
+load("@rules_rust//rust:rust.bzl", "rust_library")
 
 rust_library(
     name = "commitment_pairing",
     visibility = ["//visibility:public"],
     edition = "2018",
     srcs = glob(["src/**/*.rs"]),
-    # aliases = {
-    #     "@zexe//ff-fft": "ff_fft",
-    # },
     deps = [
+        "//oracle",
+        # "@zexe//bzl/raze/cargo:rand_core",
+        # "@zexe//bzl/raze/cargo:rand",
+        "//bzl/raze/cargo:rand_core",
+        "//bzl/raze/cargo:rand",
+        "//bzl/raze/cargo:colored",
         "@zexe//algebra",
         "@zexe//ff-fft",
-        "//oracle",
-        "//bzl/cargo:rand",
-        "//bzl/cargo:rand_core",
-        "//bzl/cargo:colored",
-    ]
+    ],
+    crate_features = [
+        "std",
+        "derive",
+        "parallel",
+        "rayon",
+        "ocaml_types",
+        "llvm_asm",
+    ],
 )

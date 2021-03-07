@@ -7,14 +7,15 @@ edition = "2018"
 algebra = { path = "../zexe/algebra", features = [ "parallel", "bn_382", "tweedle", "pasta", "asm" ] }
 groupmap = { path = "../zexe/groupmap" }
 ff-fft = { path = "../zexe/ff-fft", features = [ "parallel" ] }
+
 commitment_dlog = { path = "commitment" }
 marlin_circuits = { path = "../circuits/marlin" }
 marlin_protocol_dlog = { path = "marlin" }
 plonk_circuits = { path = "../circuits/plonk" }
 plonk_protocol_dlog = { path = "plonk" }
 oracle = { path = "../oracle" }
-rand_core = { version = "0.5" }
+rand = { version = "0.8.3" } # "0.7.3"
+rand_core = { version = "0.6.2" }  # "0.5"
 colored = "1.9.2"
-rand = "0.7.3"
 sprs = "0.7.1"
 rayon = { version = "1" }

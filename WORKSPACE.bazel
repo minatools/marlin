@@ -4,34 +4,44 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 #############
+## WARNING: "The rules are under active development, as such the lastest commit on the main branch should be used."
+
+rust_commitid = "2de6496df08b94e65a38a0fcafae9fff712862e2"
+
 http_archive(
-    name = "io_bazel_rules_rust",
-    sha256 = "618cba29165b7a893960de7bc48510b0fb182b21a4286e1d3dbacfef89ace906",
-    strip_prefix = "rules_rust-5998baf9016eca24fafbad60e15f4125dd1c5f46",
+    name = "rules_rust",
+    sha256       = "e09656770684ae5f67951c05ad1a2b5561ca220d0bf1bad228712a71af02ce79",
+    strip_prefix = "rules_rust-" + rust_commitid,
     urls = [
-        # Master branch as of 2020-09-24
-        "https://github.com/bazelbuild/rules_rust/archive/5998baf9016eca24fafbad60e15f4125dd1c5f46.tar.gz",
+        # 2021-03-04:
+        "https://github.com/bazelbuild/rules_rust/archive/" + rust_commitid + ".tar.gz",
     ],
 )
+load("@rules_rust//rust:repositories.bzl",
+     "rust_repositories", "rust_repository_set")
 
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
-rust_repositories(version = "1.47.0", edition="2018")
+rust_repositories(version = "1.47.0", rustfmt_version = "1.4.20", edition="2018")
 
-load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
-bazel_version(name = "bazel_version")
-
-############################################################
-load("//bzl/cargo:crates.bzl", marlin_fetch_remote_crates = "raze_fetch_remote_crates")
-marlin_fetch_remote_crates()
-
-############################################################
-local_repository( name = "zexe", path = "zexe" )
-# git_repository(
-#     name   = "zexe",
-#     remote = "https://github.com/o1-labs/zexe",
-#     tag    = "6699705" # should match pin
-#     # branch = "master",
+# zexe_commitid = "f317d3e5f7edc7cd3630baf08fe0de459ef9374a"
+# zexe_sha256 = "843794aff7822840d7d3976e5ee681b5dd0890f13ce4d734fac8fdc35707c16e"
+local_repository( name = "zexe", path = "zexe" )  ## submodule should match zexe_commitid
+# http_archive(
+#     name         = "zexe",
+#     sha256       = zexe_sha256,
+#     strip_prefix = "zexe-" + zexe_commitid,
+#     urls = [
+#         ## dev:
+#         "https://github.com/minatools/zexe/archive/" + zexe_commitid + ".tar.gz"
+#         ## prod:
+#         ## "https://github.com/o1-labs/zexe" ...
+#     ],
 # )
 
-load("@zexe//bzl/cargo:crates.bzl", "zexe_fetch_remote_crates")
+###########################################################
+load("@zexe//bzl/raze:crates.bzl", zexe_fetch_remote_crates = "raze_fetch_remote_crates")
 zexe_fetch_remote_crates()
+
+########################################################
+load("//bzl/raze:crates.bzl", marlin_fetch_remote_crates = "raze_fetch_remote_crates")
+marlin_fetch_remote_crates()
+

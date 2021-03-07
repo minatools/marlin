@@ -1,4 +1,4 @@
-load("@io_bazel_rules_rust//rust:rust.bzl", "rust_library")
+load("@rules_rust//rust:rust.bzl", "rust_library")
 
 rust_library(
     name = "marlin_protocol_dlog",
@@ -16,11 +16,11 @@ rust_library(
         "//circuits/marlin:marlin_circuits",
         "//oracle",
 
-        "//bzl/cargo:rand_core",
-        "//bzl/cargo:colored",
-        "//bzl/cargo:rand",
-        "//bzl/cargo:sprs",
-        "//bzl/cargo:rayon",
+        "//bzl/raze/cargo:rand_core",
+        "//bzl/raze/cargo:colored",
+        "//bzl/raze/cargo:rand",
+        "//bzl/raze/cargo:sprs",
+        "//bzl/raze/cargo:rayon",
     ],
     crate_features = [
         "parallel",

@@ -13,9 +13,9 @@ groupmap = { path = "../../zexe/groupmap" }
 ff-fft = { path = "../../zexe/ff-fft", features = [ "parallel" ] }
 ocaml = { version = "0.18.1", optional = true }
 oracle = { path = "../../oracle" }
-rand_core = { version = "0.5" }
 colored = "1.9.2"
-rand = "0.7.3"
+rand = { version = "0.8.3" } # "0.7.3"
+rand_core = { version = "0.6.2" }
 rayon = { version = "1" }
 blake2 = "0.7"
 itertools = "0.8.2"
